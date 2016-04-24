@@ -1,0 +1,124 @@
+<head>
+<title>飞百网</title>
+<meta property="qc:admins" content="15561770401111165545726375" />
+</head>
+
+<body></body>
+<template name="ApplicationLayout">
+	{{> yield "navbar"}}
+	{{> yield "main"}}
+	{{> yield "footer"}}
+</template>
+
+<template name="navbar">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">飞百网</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#"></a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul>
+			</div>
+		</div>
+	</nav>
+</template>
+
+<template name="edit">
+	<div class="container" id="edit">
+		<div class="row" id="list-g">
+			<div class="list-group col-md-offset-1 col-md-3">
+				<button type="button" class="list-group-item">账户管理</button>
+				<button type="button" class="list-group-item">我的课程</button>
+				<button type="button" class="list-group-item">考试信息</button>
+				<button type="button" class="list-group-item">我的订单</button>
+			</div>
+			<ul class="list-group col-md-7">
+				<li class="list-group-item">
+					<form>
+						<div class="form-group">
+							<label for="exampleInputEmail1">昵称</label>
+							<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">邮箱</label>
+							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">手机号</label>
+							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></div>
+						<button type="submit" class="btn btn-success" style="margin-left:300px">保存</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</template>
+
+<template name="main">
+	<img src="fly.jpeg" alt="" class="main">
+	<div class="container main-course">
+		<span style="border-radius:50px;background:red;width:50px;height:50px;"></span>
+		<div class="row">
+			{{#each course in courses}}
+				<div class="col-sm-12 col-md-6">
+					<div class="thumbnail">
+						<img src="fly.jpeg" alt="..." class="course-img">
+						<div class="caption">
+							<h3>{{course.title}}</h3>
+							<p>{{course.description}}</p>
+							<p>
+								<a href="/course/{{course._id}}" class="btn btn-primary btn-block js-choose-modal" role="button">进入课程</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="footer">
+	<footer class="footer_intro clearfix">
+		<div class="footer_link">
+			<ul id="#footer">
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">网站首页</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">人才招聘</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">联系我们</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">合作专区</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">关于我们</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">意见反馈</a>
+				</li>
+				<li class="f_li">
+					<a href="#" target="_blank" class="f_a">友情链接</a>
+				</li>
+			</ul>
+		</div>
+		<p>
+			Copyright © 2016 imooc.com All Rights Reserved | 京ICP备 13046642号-2
+		</p>
+	</footer>
+</template>
+
+<template name="_loginButtonsAdditionalLoggedInDropdownActions">
+	<button class="btn btn-default login-buttons btn-block" id="login-buttons-edit-profile">个人主页</button>
+</template>

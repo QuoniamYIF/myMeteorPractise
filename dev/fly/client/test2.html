@@ -1,0 +1,48 @@
+<template name="test2">
+	<div class="container modal-main">
+		<div class="page-header">
+			<h1>
+				<span class="glyphicon glyphicon-grain modal-span" aria-hidden="true"></span>
+				&nbsp;&nbsp;综合测试
+			</h1>
+			<p>
+				<span class="label label-info">标签1</span>
+				&nbsp;
+				<span class="label label-info">标签2</span>
+				&nbsp;
+				<span class="label label-info">标签3</span>
+			</p>
+		</div>
+		{{#with course}}
+		<div class="row">
+				<div class="col-md-12 chart" id="question">
+					<div class="panel-group" id="accordion{{chart.cCount}}" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<!-- {{#each chartC}} -->
+							{{#each chart in course.content}}
+							{{#each chartC in chart.qC}}
+							{{#if vali chartC.qCount}}
+							<div class="panel-heading" role="tab">
+								<!-- content -->
+								<h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion{{chart.cCount}}" href="#collapse{{chartC.qCount}}{{chart.cCount}}" aria-expanded="false" aria-controls="collapseOne">{{count}}.{{chartC.q}}?</a>
+								</h4>
+							</div>
+							<div id="collapse{{chartC.qCount}}{{chart.cCount}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									<p>A.{{chartC.qA}}</p>
+									<p>B.{{chartC.qB}}</p>
+									<p>C.{{chartC.qC}}</p>
+									<p>D.{{chartC.qD}}</p>
+								</div>
+							</div>
+							{{/if}}
+							{{/each}}
+							{{/each}}
+						</div>
+					</div>
+				</div>
+		</div>
+		{{/with}}
+	</div>
+</template>

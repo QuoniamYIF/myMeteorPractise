@@ -1,0 +1,45 @@
+<template name="test1">
+	<div class="container test">
+		<div class="row">
+			{{#with course}}
+			<div class="col-sm-12 col-md-4">
+				<div class="btn-group-vertical" role="group">
+					{{#each chart in course.content}}
+					<button type="button" class="btn btn-default btn-block js-toggle-chart" style="width:100%" id="{{chart.cCount}}">{{chart.cName}}:{{chart.cTitle}}</button>
+					{{/each}}
+				</div>
+			</div>
+			{{#each chart in course.content}}
+			<div class="col-sm-12 col-md-7 {{chart.classN}} chart" id="question">
+				<div class="panel-group" id="accordion{{chart.cCount}}" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<!-- {{#each chartC}} -->
+						{{#each chartC in chart.qC}}
+						<div class="panel-heading" role="tab">
+							<!-- content -->
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion{{chart.cCount}}" href="#collapse{{chartC.qCount}}{{chart.cCount}}" aria-expanded="false" aria-controls="collapseOne">{{chartC.qCount}}.{{chartC.q}}?</a>
+							</h4>
+						</div>
+						<div id="collapse{{chartC.qCount}}{{chart.cCount}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qA}}" class="js-add-option">A.{{chartC.qA}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qB}}" class="js-add-option">B.{{chartC.qB}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qC}}" class="js-add-option">C.{{chartC.qC}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qD}}" class="js-add-option">D.{{chartC.qD}}</p>
+							</div>
+						</div>
+						{{/each}}
+						<!-- {{/each}} -->
+					</div>
+				</div>
+				<button class="js-check-answer">测评</button>
+			</div>
+			{{/each}}
+			{{/with}}
+			<div class="col-sm-12 col-md-6 col-md-offset-3">
+				<canvas id="myChart1" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
+</template>

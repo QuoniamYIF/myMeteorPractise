@@ -1,0 +1,21 @@
+<template name="preview">
+	<div class="container">
+		<h1>课程内容展示</h1>
+
+		{{#each course in courses}}
+			<h1>{{course.title}}</h1>
+			<h2>课程介绍：{{course.description}}</h2>
+			<hr>
+			{{#each chart in course.content}}
+				<h3><i>{{chart.cName}}:{{chart.cTitle}}</i></h3>
+				{{#each qBody in chart.qC}}
+					<h5>{{qBody.qCount}}.{{qBody.q}}</h5>
+					<h4>A:{{qBody.qA}}</h4>
+					<h5>B:{{qBody.qB}}</h5>
+					<h5>C:{{qBody.qC}}</h5>
+					<h5>D;{{qBody.qD}}</h5>
+				{{/each}}
+			{{/each}}
+		{{/each}}
+	</div>
+</template>
