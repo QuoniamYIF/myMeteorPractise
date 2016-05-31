@@ -113,6 +113,18 @@ Router.route('course/test2/:id', function () {
     });
 });
 
+Router.route('allcourse', function () {    
+    this.render('navbar', {
+        to: "navbar"
+    });
+    this.render('all', {
+        to: "main"
+    });
+    this.render('footer', {
+        to: "footer"
+    });
+});
+
 Router.route('/preview', function(){
     this.render('preview');
 });
@@ -143,6 +155,13 @@ Template.main.helpers({
     }
 });
 
+Template.all.helpers({
+    coursesall: function(){
+        console.log(Courses.find());
+        return Courses.find({});
+    }
+});
+
 Template.modal.helpers({
     course: function(){
         return Courses.findOne({_id: Session.get("courseid")});
@@ -165,6 +184,35 @@ Template.test1.helpers({
     //     console.log(Courses.findOne({_id: Session.get("courseid")}).content[0].qC);
     //     return Courses.findOne({_id: Session.get("courseid")}).content[0].qC;
     // },
+    checkUrl: function(selection){
+        var index = selection.split(':')[0];
+        if(index == "http"){            
+            return "<div class='container'>"+
+                       "<div id='content' class='container-fluid'>"+ 
+                            "<div class='row'>"+           
+                            "<div class='col-xs-12 col-md-offest-3 col-md-6'>"+
+                            "<div class='thumbnail js-show-modal'>"+
+                            "<img class='crop-img' src='" + selection + "'/>" +
+                            "</div>"+
+                            "</div>"+
+                            "</div>"+
+                       "</div>"+
+                       "<div id='modal-container'>"+
+                            "<div id='imageModal' class='modal fade'>"+
+                            "<div class='modal-dialog' style='width:800'>"+
+                            "<div class='modal-content'>"+
+                            "<div class='modal-body'>"+
+                            "<img style='width:100%' src='"+ selection + "' />"+
+                            "</div>"+
+                            "</div>"+
+                            "</div>"+
+                            "</div>"+
+                       "</div>"+                       
+                   "</div>"
+        } else {
+            return '<span>' + selection + '</slection>';
+        }
+    }
 });
 
 Template.test2.helpers({
@@ -432,6 +480,13 @@ Template.test1.events({
         // myChart.Bar(dataA);
         // paint(myNewChart, dataA);
     },
+    'click .js-check-user': function(){
+        console.log(this);
+    },
+    'click .js-show-modal': function(){
+        console.log("111111111");
+        $('#imageModal').modal('show');
+    }
 });
 
 //模板事件设置结束
@@ -462,7 +517,7 @@ Accounts.ui.config({
             if (value) {
                 return true;
             } else {
-                errorFunction('You must accept the terms and conditions.');
+                errorFunction('你必須接受該協議');
                 return false;
             }
         }

@@ -23,10 +23,10 @@
 						</div>
 						<div id="collapse{{chartC.qCount}}{{chart.cCount}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qA}}" class="js-add-option">A.{{chartC.qA}}</p>
-								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qB}}" class="js-add-option">B.{{chartC.qB}}</p>
-								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qC}}" class="js-add-option">C.{{chartC.qC}}</p>
-								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qD}}" class="js-add-option">D.{{chartC.qD}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qA}}" class="js-add-option">A.{{{checkUrl chartC.qA}}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qB}}" class="js-add-option">B.{{{checkUrl chartC.qB}}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qC}}" class="js-add-option">C.{{{checkUrl chartC.qC}}}</p>
+								<p><input type="radio" name="question{{chart.cCount}}{{chartC.qCount}}" value="{{chartC.qD}}" class="js-add-option">D.{{{checkUrl chartC.qD}}}</p>
 							</div>
 						</div>
 						{{/each}}
@@ -34,6 +34,7 @@
 					</div>
 				</div>
 				<button class="js-check-answer">测评</button>
+				<button class="js-check-user">test</button>
 			</div>
 			{{/each}}
 			{{/with}}
