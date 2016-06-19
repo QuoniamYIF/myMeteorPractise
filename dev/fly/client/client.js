@@ -489,11 +489,40 @@ Template.test1.events({
     }
 });
 
+Template.preview.events({
+    'click .js-del-course': function(event){
+        var course_id = event.currentTarget.innerHTML.split("&nbsp;")[1];        
+        Courses.remove({"_id": course_id});         
+    },
+    'blur .js-change-title': function(event){
+        var course_id = event.currentTarget.value.split(":")[0];
+        var cou = Courses.find({"_id": course_id}).fetch();
+        // console.log(cou[0]);        
+        // console.log(cou.content);
+        
+        cou[0].content[0].cTitle = event.currentTarget.value.split(":")[2];
+        var newC = cou[0].content;
+        Courses.update(course_id, {$set: {content : newC}});      
+    },
+    'blur .js-change-qContent': function(event){
+        var course_id = event.currentTarget.value.split(":")[0];
+        var cCount = event.currentTarget.value.split(":")[1];        
+        var qCount = event.currentTarget.value.split(":")[2] - 1;
+        var cou = Courses.find({"_id": course_id}).fetch();
+        // console.log(cou[0]);        
+        // console.log(cou.content);
+        cou[0].content[cCount].qC[qCount].q = event.currentTarget.value.split(":")[3];
+        var newC = cou[0].content;
+        Courses.update(course_id, {$set: {content : newC}});      
+    },
+});
+
 //模板事件设置结束
 
 
 //账户配置
 accountsUIBootstrap3.setLanguage('zh-CN');
+Accounts.config({sendVerificationEmail: true})
 
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL"
@@ -523,6 +552,10 @@ Accounts.ui.config({
         }
     }]
 });
+accountsUIBootstrap3.logoutCallback = function(error) {
+  if(error) console.log("Error:" + error);
+  Router.go('/');
+}
 //end 账户配置
 
 //全局函数
