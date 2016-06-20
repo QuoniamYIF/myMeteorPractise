@@ -134,6 +134,42 @@ Router.route('/admin', function(){
 });
 //end 路由
 
+//账户配置
+accountsUIBootstrap3.setLanguage('zh-CN');		
+Accounts.ui.config({
+  passwordSignupFields: "USERNAME_AND_EMAIL"
+});
+
+Accounts.ui.config({
+        forceEmailLowercase: true,
+        forceUsernameLowercase: true,
+        forcePasswordLowercase: true
+});
+
+Accounts.ui.config({
+        requestPermissions: {},
+        extraSignupFields: [{
+            fieldName: 'terms',
+            fieldLabel: '我已阅读并接受飞百网用户协议',
+            inputType: 'checkbox',
+            visible: true,
+            saveToProfile: false,
+            validate: function(value, errorFunction) {
+                    if (value) {
+                            return true;
+                    } else {
+                            errorFunction('你必須接受該協議');
+                            return false;
+                    }
+            }
+        }]
+});
+accountsUIBootstrap3.logoutCallback = function(error) {
+    if(error) console.log("Error:" + error);
+    Router.go('/');
+}
+//end 账户配置
+
 
 Template._loginButtonsLoggedInDropdown.events({
     'click #login-buttons-edit-profile': function(event) {
@@ -518,45 +554,6 @@ Template.preview.events({
 });
 
 //模板事件设置结束
-
-
-//账户配置
-accountsUIBootstrap3.setLanguage('zh-CN');
-Accounts.config({sendVerificationEmail: true})
-
-Accounts.ui.config({
-  passwordSignupFields: "USERNAME_AND_EMAIL"
-});
-
-Accounts.ui.config({
-    forceEmailLowercase: true,
-    forceUsernameLowercase: true,
-    forcePasswordLowercase: true
-});
-
-Accounts.ui.config({
-    requestPermissions: {},
-    extraSignupFields: [{
-        fieldName: 'terms',
-        fieldLabel: '我已阅读并接受飞百网用户协议',
-        inputType: 'checkbox',
-        visible: true,
-        saveToProfile: false,
-        validate: function(value, errorFunction) {
-            if (value) {
-                return true;
-            } else {
-                errorFunction('你必須接受該協議');
-                return false;
-            }
-        }
-    }]
-});
-accountsUIBootstrap3.logoutCallback = function(error) {
-  if(error) console.log("Error:" + error);
-  Router.go('/');
-}
-//end 账户配置
 
 //全局函数
 function paint(myChart, data) {
